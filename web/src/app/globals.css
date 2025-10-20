@@ -27,10 +27,6 @@ body {
   padding: 0px;
   width: 100%;
 }
-::selection {
-  color: var(--color-pink-100);
-  background-color: var(--color-pink-500);
-}
 
 @utility button-md {
   font-weight: 600;
