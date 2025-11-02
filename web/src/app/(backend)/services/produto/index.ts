@@ -13,8 +13,8 @@ export async function getAllProdutos(){
   }
 }
 
-//pega o produto pelo Id
-export async function geProdutoById(id: string){
+//pega o produto pelo Id.
+export async function getProdutoById(id: string){
   try {
     const produto = await prisma.produto.findUnique({
       where: {
@@ -45,8 +45,7 @@ export async function getProdutoByCategoria(categoriaId: string){
     throw new Error(String(error) || "Falha ao buscar produto")
   }
 }
- export async function createProduto( data: {
-  id: string;       
+ export async function createProduto( data: {       
   nome: string;    
   preco: number;     
   descricao: string;
@@ -55,7 +54,6 @@ export async function getProdutoByCategoria(categoriaId: string){
   try {
     const produto = await prisma.produto.create({
       data: {
-        id: data.id,
         nome: data.nome,
         preco: data.preco,
         descricao: data.descricao,
@@ -64,7 +62,7 @@ export async function getProdutoByCategoria(categoriaId: string){
     }) 
     return produto
   } catch (error) {
-    throw new Error(String(error) || "Falha ao criar matéria")
+    throw new Error(String(error) || "Falha ao criar Produto")
   }
  }
 
@@ -83,7 +81,7 @@ export async function getProdutoByCategoria(categoriaId: string){
  }
 
  //edita o produto
- export async function updateProduto(id: string, data: any){
+ export async function updateProduto(id: string, data){
   try {
     const produtoUpdated = await prisma.produto.update({
       where: { id },

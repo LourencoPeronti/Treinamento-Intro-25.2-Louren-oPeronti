@@ -2,7 +2,6 @@
 import LandingPagesNav from "@/components/nav/InitialNav";
 import Embarcar from "./Embarcar";
 import { auth } from "@/auth";
-import CarouselExample from "./CarouselExample";
 import ProdutoCard from "@/components/produtoCard/produtoCard";
 import { useState } from "react";
 
@@ -48,7 +47,7 @@ export default function Home() {
     
     function openModal(){
       setModal(!modal)
-      console.log("modal: " + modal)
+      //console.log("modal: " + modal)
     }
     function adicionaCarrinho(id: string){
       setProduto((antProduto) =>
@@ -86,7 +85,7 @@ export default function Home() {
         </div>
         <div>
           {produtosCarrinho.map((produto) => (
-            <div className="flex flex-row justify-between border-b-2 border-[#94ADD2] p-3">
+            <div key = {produto.id} className="flex flex-row justify-between border-b-2 border-[#94ADD2] p-3">
               <p>{produto.nome}</p>
               <p className="font-bold">{produto.preco}</p>
             </div>

@@ -34,14 +34,14 @@ model User {
 }
 
 model Compra {
-  id         String          @id @map("_id")
+  id         String          @id @default(uuid()) @map("_id")
   PrecoTotal Float
   compra     CompraProduto[]
   user       UserCompra[]
 }
 
 model Produto {
-  id        String             @id @map("_id")
+  id        String   @id @default(uuid()) @map("_id")
   nome      String
   preco     Float
   descricao String
@@ -51,13 +51,13 @@ model Produto {
 }
 
 model Categoria {
-  id        String             @id @map("_id")
+  id        String             @id @default(uuid()) @map("_id")
   nome      String
   produtos ProdutoCategoria[]
 }
 
 model UserCompra {
-  id       String @id @map("_id") @db.ObjectId
+  id       String @id @default(uuid()) @map("_id")
   compraId String
   userId   String
 
@@ -66,7 +66,7 @@ model UserCompra {
 }
 
 model CompraProduto {
-  id        String @id @map("_id")
+  id        String @id @default(uuid()) @map("_id")
   compraId  String
   produtoId String
   quantidade Int @default(1) 
@@ -76,7 +76,7 @@ model CompraProduto {
 }
 
 model ProdutoCategoria {
-  id          String @id @map("_id")
+  id          String @id @default(uuid()) @map("_id")
   produtoId   String
   categoriaId String
 

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
-  geProdutoById,
+  getProdutoById,
   updateProduto,
   deleteProduto,
 } from "../../../services/produto";
@@ -11,7 +11,7 @@ interface Params {
 
 export async function GET(req: NextRequest, { params }: Params) {
   try {
-    const produto = await geProdutoById(params.id);
+    const produto = await getProdutoById(params.id);
     if (!produto) return NextResponse.json({ error: "Produto não encontrado" }, { status: 404 });
     return NextResponse.json(produto);
   } catch (error) {
