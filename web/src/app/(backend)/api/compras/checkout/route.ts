@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import prisma from "@/app/(backend)/services/db";
 import { NextResponse } from "next/server";
+import { createCompra } from "@/app/(backend)/services/compra";
 
 export async function POST(req: Request){
   try {
@@ -11,47 +12,14 @@ export async function POST(req: Request){
     }
 
     const body = await req.json()
-    /*Requisição do tipo: 
-    {
-      itens: [
-        {
-          produtoId: "123",
-          quantidade: 2
-          preco: 149,90
-        }
-      ]
+   
+  const compra = await createCompra({
+  produtos: body.produtos,
+  userIds: body.userIds,
+})
 
-    } */
-    const { itens } = body
-
-    const precoTotal = itens.reduce(
-      (total: number, item: {preco: number, quantidade: number}) => total + item.preco * item.quantidade, 0
-    )
-
-    const compra = await prisma.compra.create({
-        data: {
-          PrecoTotal: precoTotal,
-          user: {
-            create: {
-              user: {
-                connect: { id: session.user.id }
-               },
-            },
-          },
-          compra: {
-            create: itens.map((item: { quantidade: number; produtoId: string; }) => ({
-              quantidade: item.quantidade,
-              produto: { connect: { id: item.produtoId } },
-            })),
-          },
-        },
-        include: {
-          compra: { include: { produto: true } },
-          user: { include: { user: true } },
-        },
-});
 return new Response(JSON.stringify({message: "Compra efetivada com sucesso", compra}), {status: 200})
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json(
       {error: error.message || "erro ao efetivar a compra"}
     )

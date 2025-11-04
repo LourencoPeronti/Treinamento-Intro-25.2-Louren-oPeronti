@@ -81,7 +81,7 @@ export async function getProdutoByCategoria(categoriaId: string){
  }
 
  //edita o produto
- export async function updateProduto(id: string, data){
+ export async function updateProduto(id: string, data: Date){
   try {
     const produtoUpdated = await prisma.produto.update({
       where: { id },

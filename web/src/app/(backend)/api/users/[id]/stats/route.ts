@@ -1,3 +1,4 @@
+import { getCompraById } from "@/app/(backend)/services/compra";
 import prisma from "@/app/(backend)/services/db"
 import { getProdutoById } from "@/app/(backend)/services/produto";
 
@@ -6,16 +7,7 @@ export async function GET(request: Request, {params}: {params: {id:string}}){
 
   const userId = params.id
   try {
-    const compras = await prisma.compra.findMany({
-      where: {
-        user: { some: { userId } },
-      },
-      include: {
-        compra: {
-          include: { produto: true },
-        },
-      },
-    });
+    const compras = await getCompraById(userId)
 
     if(compras.length == 0){
       return new Response(JSON.stringify({
@@ -59,7 +51,7 @@ export async function GET(request: Request, {params}: {params: {id:string}}){
     return new Response(JSON.stringify({
         totalGasto,
         numeroCompras, 
-        produtoMaisComprado: produtoMaisComprado.nome
+        produtoMaisComprado: produtoMaisComprado?.nome
       }))
 
   } catch (error) {

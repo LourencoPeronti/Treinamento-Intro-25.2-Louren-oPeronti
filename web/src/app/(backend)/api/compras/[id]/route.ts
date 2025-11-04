@@ -25,7 +25,7 @@ export async function GET(req: NextRequest, { params }: Params) {
   }
 }
 
-export async function PUT(req: NextRequest, { params }: Params) {
+export async function PATCH(req: NextRequest, { params }: Params) {
   try {
     const data = await req.json();
     const compraAtualizada = await updateCompra(params.id, data);
@@ -36,7 +36,7 @@ export async function PUT(req: NextRequest, { params }: Params) {
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: Params) {
+export async function DELETE({ params }: Params) {
   try {
     const compraDeletada = await deleteCompra(params.id);
     return NextResponse.json(compraDeletada, { status: 200 });

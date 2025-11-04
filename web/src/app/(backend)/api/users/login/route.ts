@@ -24,7 +24,7 @@ export async function POST(req: Request){
     })
 
     return new Response(JSON.stringify({message: "Login feito com sucesso!", result: result}), { status: 200 });
-  } catch (error) {
+  } catch (error: any) {
     //return new Response(JSON.stringify({erro: error}))
     if (error.body.message.includes("Invalid email or password")) {
       return new Response(JSON.stringify({ error: "Email ou senha incorretos" }), { status: 401 });
