@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { string, z } from "zod";
 import { emailSchema, nameSchema, passwordSchema, precoSchema, descSchema, imgSchema } from "./base.schema";
 
 export const loginSchema = z.object({

@@ -6,22 +6,23 @@ import { createCompra } from "@/app/(backend)/services/compra";
 export async function POST(req: Request){
   try {
     //checa se o usuário está logado
-    const session = await auth.api.getSession({headers: req.headers})
+    /*const session = await auth.api.getSession({headers: req.headers})
     if(!session){
       return new Response(JSON.stringify({erro: "Usuário não logado"}), {status: 401})
     }
-
+    return NextResponse.json(session)*/
+    const session = await auth.api.getSession({headers: req.headers})
     const body = await req.json()
    
   const compra = await createCompra({
   produtos: body.produtos,
-  userIds: body.userIds,
+  userIds: [session.user.id],
 })
 
-return new Response(JSON.stringify({message: "Compra efetivada com sucesso", compra}), {status: 200})
+ return new Response(JSON.stringify({message: "compra efetivada com sucesso", compra: compra}), {status: 200})
   } catch (error: any) {
     return NextResponse.json(
-      {error: error.message || "erro ao efetivar a compra"}
+      {error: error|| "erro ao efetivar a compra"}
     )
   }
 }

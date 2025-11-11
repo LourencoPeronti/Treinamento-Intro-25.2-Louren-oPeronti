@@ -1,3 +1,4 @@
+import { Status } from "@/generated/prisma";
 import prisma from "../db"
 
 //cria uma compra
@@ -39,10 +40,19 @@ export async function createCompra(data: {
           user: { include: { user: true } },
         },
       });
-
+      return compra
   } catch (error) {
     throw new Error(String(Error) || "Falha ao criar compra")
   }
+}
+// atualiza o status de uma compra
+export async function upsateStatusCompra(compraId: string, status: Status){
+  const compraAtualizada = await prisma.compra.update({
+    where: {id: compraId},
+    data: { status: status},
+  })
+
+  return compraAtualizada
 }
 
 //atualiza uma compra
@@ -110,7 +120,7 @@ export async function deleteCompra(compraId: string) {
   }
 
   //pega as compras de um usuário, identificando-o pelo id
-export async function getCompraById(userId: string){
+export async function getCompraById(userId: any){
   try {
     const compras = await prisma.compra.findMany({
       where: {
@@ -125,6 +135,6 @@ export async function getCompraById(userId: string){
 
   return compras
   } catch (error) {
-    throw new Error(String(error) || 'Falha ao criar matéria')
+    throw new Error(String(error) || 'Falha ao procurar compra')
   }
 }

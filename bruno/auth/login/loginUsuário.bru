@@ -1,0 +1,27 @@
+meta {
+  name: loginUsuário
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/auth/login
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "email": "lourenco@yahoo.com", 
+    "password": "Lourenco123@@", 
+    "callbackURL": "/"
+  }
+}
+
+script:post-response {
+  if (res.body && res.body.result.token) {
+    bru.setVar("sessionValue", res.body.result.token);
+  } else {
+    console.log("No ID found in response");
+  }
+}

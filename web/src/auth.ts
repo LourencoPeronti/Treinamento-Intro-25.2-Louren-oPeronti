@@ -2,7 +2,7 @@ import { betterAuth } from "better-auth";
 import { nextCookies } from "better-auth/next-js";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import prisma from "./app/(backend)/services/db";
-
+import { NextRequest, NextResponse } from "next/server";
 import { customSession } from "better-auth/plugins";
 import { getUserRole } from "@/backend/services/auth";
 import { expo } from "@better-auth/expo";
@@ -66,3 +66,4 @@ export const auth = betterAuth({
         "noctiluz://*",
     ]
 });
+

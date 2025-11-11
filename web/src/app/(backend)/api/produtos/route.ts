@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getAllProdutos, createProduto } from "../../services/produto"
 import { returnInvalidDataErrors, validBody } from "@/utils";
 import { produtoSchema } from "../../schemas";
+import { handleError } from "../../utils/handleError";
 
 export async function GET() {
   try {
@@ -18,7 +19,7 @@ export async function POST(req: NextRequest) {
     const validation = produtoSchema.safeParse(body)
 
     if(!validation.success){
-      return returnInvalidDataErrors(validation.error)
+      throw validation.error
     }
 
     const validated = validation.data
@@ -26,6 +27,6 @@ export async function POST(req: NextRequest) {
     const novoProduto = await createProduto(validated);
     return NextResponse.json(novoProduto, { status: 201 });
   } catch (error) {
-    return NextResponse.json({ error: String(error) }, { status: 500 });
+    return handleError(error);
   }
 }

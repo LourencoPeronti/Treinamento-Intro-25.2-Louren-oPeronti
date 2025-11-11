@@ -1,17 +1,19 @@
 
 import { loginSchema } from "@/app/(backend)/schemas";
 import { auth } from "@/auth";
-import { validBody, returnInvalidDataErrors } from "@/utils";
+import { validBody } from "@/utils";
+import { handleError } from "@/app/(backend)/utils/handleError";
+import { headers } from "next/headers";
+import { NextRequest } from "next/server";
 
-export async function POST(req: Request){
+export async function POST(req: NextRequest){
   try {
     const body = await validBody(req);
     const validation = loginSchema.safeParse(body)
 
     if (!validation.success) {
-          return returnInvalidDataErrors(validation.error);
-        }
-
+        throw validation.error
+    }
     const validated = validation.data
 
     const { email, password } = validated
@@ -19,18 +21,21 @@ export async function POST(req: Request){
     const result = await auth.api.signInEmail({
       body: { 
         email, 
-        password
+        password,
+        callbackURL: "/"
       },
     })
 
-    return new Response(JSON.stringify({message: "Login feito com sucesso!", result: result}), { status: 200 });
+    return new Response(JSON.stringify({result}), { status: 200 });
   } catch (error: any) {
+
+    return handleError(error)
     //return new Response(JSON.stringify({erro: error}))
-    if (error.body.message.includes("Invalid email or password")) {
+    /*if (error.body.message.includes("Invalid email or password")) {
       return new Response(JSON.stringify({ error: "Email ou senha incorretos" }), { status: 401 });
     } else {
       return new Response(JSON.stringify({ error: "Login falhou" }), { status: 400 });
-    }
+    }*/
   }
 }
 //arrumar o tratamento de erros, tratando certinho como ele manda na resposta

@@ -1,12 +1,15 @@
 import { getCompraById } from "@/app/(backend)/services/compra";
 import prisma from "@/app/(backend)/services/db"
 import { getProdutoById } from "@/app/(backend)/services/produto";
+import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@/auth";
 
 
-export async function GET(request: Request, {params}: {params: {id:string}}){
-
-  const userId = params.id
+export async function GET(request: Request){
+  
   try {
+    const session = await auth.api.getSession({headers: request.headers})
+    const userId = session.user.id
     const compras = await getCompraById(userId)
 
     if(compras.length == 0){

@@ -1,34 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { registerSchema } from "@/backend/schemas";
-import { blockForbiddenRequests, returnInvalidDataErrors, validBody, zodErrorHandler } from "@/utils/api";
-import { findUserByEmail, getAllUsers } from "../../services/users";
-import { AllowedRoutes } from "@/types";
+import { returnInvalidDataErrors, validBody, zodErrorHandler } from "@/utils/api";
 import { auth } from "@/auth";
-import { handleError } from "../../utils/handleError";
+import { findUserByEmail } from "@/app/(backend)/services/users";
+import { handleError } from "@/app/(backend)/utils/handleError";
 
-const allowedRoles: AllowedRoutes = {
-  GET: ["SUPER_ADMIN", "ADMIN"]
-}
-
-// rota de get all users
-export async function GET(request: NextRequest) {
-  try {
-    const forbidden = await blockForbiddenRequests(request, allowedRoles.POST);
-    if (forbidden) {
-      return forbidden;
-    }
-
-    const users = await getAllUsers();
-    return NextResponse.json(users);
-  } catch (error) {
-    if (error instanceof NextResponse) {
-      return error;
-    }
-
-    return zodErrorHandler(error);    
-  }
-}
 
 export async function POST(request: NextRequest) {
   try {
@@ -36,7 +13,7 @@ export async function POST(request: NextRequest) {
     const validationResult = registerSchema.safeParse(body);
 
     if (!validationResult.success) {
-      return returnInvalidDataErrors(validationResult.error);
+      throw validationResult.error
     }
     
     const validatedData = validationResult.data
@@ -76,6 +53,6 @@ export async function POST(request: NextRequest) {
       return error;
     }
 
-    return zodErrorHandler(error);    
+    return handleError(error);    
   }
 }

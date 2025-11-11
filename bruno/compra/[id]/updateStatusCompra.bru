@@ -1,0 +1,26 @@
+meta {
+  name: updateStatusCompra
+  type: http
+  seq: 1
+}
+
+patch {
+  url: http://localhost:3000/api/compras/29e258f1-8769-45b7-b9da-8f314fadbcec/status
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "status": "Paid"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

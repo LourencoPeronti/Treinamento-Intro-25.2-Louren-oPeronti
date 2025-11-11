@@ -1,0 +1,20 @@
+meta {
+  name: Stats
+  type: http
+  seq: 7
+}
+
+get {
+  url: http://localhost:3000/api/users/U0j3r5SDEc74yZz6j9MRkILM52EQhYW4/stats
+  body: none
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

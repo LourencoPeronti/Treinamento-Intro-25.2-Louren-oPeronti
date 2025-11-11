@@ -1,0 +1,32 @@
+meta {
+  name: createCompra
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:3000/api/compras/checkout
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "produtos": [
+      { "id": "1e2fbd6a-d576-4d5d-ae86-f8c07bb1971e", "quantidade": 0 },
+      { "id": "50b8bab3-2405-4247-b8ff-1d7513c90b41", "quantidade": 1 }
+    ],
+    "userIds": ["U0j3r5SDEc74yZz6j9MRkILM52EQhYW4"]
+  }
+  
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

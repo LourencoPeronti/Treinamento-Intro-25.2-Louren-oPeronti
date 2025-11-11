@@ -14,6 +14,14 @@ enum Role {
   SUPER_ADMIN
 }
 
+enum Status {
+  Pending
+  Paid
+  Shipped
+  Delivered
+  Cancelled
+}
+
 model User {
   // nao mexer >
   id            String   @id @default(uuid()) @map("_id")
@@ -36,6 +44,7 @@ model User {
 model Compra {
   id         String          @id @default(uuid()) @map("_id")
   PrecoTotal Float
+  status  Status @default(Pending)
   compra     CompraProduto[]
   user       UserCompra[]
 }

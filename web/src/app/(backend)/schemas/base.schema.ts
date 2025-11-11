@@ -42,5 +42,12 @@ export const imgSchema = z
     .string({
       error: (issue) => issue.input === undefined
       ? "Imagem obrigatória" : "hhCampo deve ser um texto com a URL da sua imagem"
-
     })
+
+export const statusSchema = z.enum([
+  "Pending",
+  "Paid",
+  "Shipped",
+  "Delivered",
+  "Cancelled"
+])

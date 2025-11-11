@@ -1,0 +1,29 @@
+meta {
+  name: createProduto
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:3000/api/produtos
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "nome": "Teste",
+    "preco": "123",
+    "descricao": "oieibwiaaaaaaaaaaaaaaaaaaaaaaa",
+    "img": "https://imagemMinha"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
