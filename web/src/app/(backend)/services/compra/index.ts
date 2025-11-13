@@ -120,7 +120,7 @@ export async function deleteCompra(compraId: string) {
   }
 
   //pega as compras de um usuário, identificando-o pelo id
-export async function getCompraById(userId: any){
+export async function getCompraByUserId(userId: any){
   try {
     const compras = await prisma.compra.findMany({
       where: {
@@ -137,4 +137,10 @@ export async function getCompraById(userId: any){
   } catch (error) {
     throw new Error(String(error) || 'Falha ao procurar compra')
   }
+}
+
+export async function getCompraById(compraId: string){
+  return await prisma.userCompra.findMany({
+        where: { compraId },
+      });
 }

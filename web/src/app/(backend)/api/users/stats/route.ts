@@ -1,4 +1,4 @@
-import { getCompraById } from "@/app/(backend)/services/compra";
+import { getCompraByUserId } from "@/app/(backend)/services/compra";
 import prisma from "@/app/(backend)/services/db"
 import { getProdutoById } from "@/app/(backend)/services/produto";
 import { NextRequest, NextResponse } from "next/server";
@@ -10,7 +10,7 @@ export async function GET(request: Request){
   try {
     const session = await auth.api.getSession({headers: request.headers})
     const userId = session.user.id
-    const compras = await getCompraById(userId)
+    const compras = await getCompraByUserId(userId)
 
     if(compras.length == 0){
       return new Response(JSON.stringify({

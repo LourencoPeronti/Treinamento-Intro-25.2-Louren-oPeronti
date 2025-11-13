@@ -9,7 +9,10 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-        "@prisma/client"
+      "@prisma/client"
     ]
+  },
+  "dependencies": {
+    "resend": "6.1.0"
   }
 }

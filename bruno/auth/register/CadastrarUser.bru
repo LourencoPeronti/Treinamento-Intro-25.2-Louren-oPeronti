@@ -5,13 +5,9 @@ meta {
 }
 
 post {
-  url: http://localhost:3000/api/users
+  url: http://localhost:3000/api/auth/register
   body: json
   auth: inherit
-}
-
-params:query {
-  : 
 }
 
 headers {
@@ -21,9 +17,9 @@ headers {
 body:json {
   {
     "name": "Lourenco",
-    "email": "lourenco2@gmail.com",
-    "password": "Lourenco123@@@",
-    "confirmPassword": "Lourenco123@@@",
+    "email": "lourencoperonti@gmail.com",
+    "password": "Lourenco123",
+    "confirmPassword": "Lourenco123",
     "callbackURL": "/"
   }
 }

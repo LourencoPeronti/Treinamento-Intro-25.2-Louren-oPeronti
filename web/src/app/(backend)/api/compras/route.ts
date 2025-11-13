@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createCompra, getCompraById } from "../../services/compra";
+import { createCompra, getCompraByUserId } from "../../services/compra";
 
 export async function POST(req: NextRequest) {
   try {
@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
         { status: 400 }
       );
 
-    const compras = await getCompraById(userId);
+    const compras = await getCompraByUserId(userId);
     return NextResponse.json(compras, { status: 200 });
   } catch (error) {
     console.error("Erro ao buscar compras:", error);
