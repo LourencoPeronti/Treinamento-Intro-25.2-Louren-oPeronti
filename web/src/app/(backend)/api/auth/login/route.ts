@@ -3,7 +3,6 @@ import { loginSchema } from "@/app/(backend)/schemas";
 import { auth } from "@/auth";
 import { validBody } from "@/utils";
 import { handleError } from "@/app/(backend)/utils/handleError";
-import { headers } from "next/headers";
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest){

@@ -15,7 +15,7 @@ export function handleError(error: any){
       ), {status: 400}) 
     }
 
-    if(error.body.message == "Invalid email or password"){
+    /*if(error?.body?.message == "Invalid email or password"){
         return new Response(JSON.stringify(
           {
             body:{
@@ -24,7 +24,7 @@ export function handleError(error: any){
           },
       }
       ), {status: 400}) 
-    }
+    }*/
 
     return new Response(JSON.stringify({
       body:{

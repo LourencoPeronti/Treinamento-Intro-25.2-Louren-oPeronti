@@ -28,7 +28,7 @@ export const produtoSchema = z.object({
   nome: nameSchema,
   preco: precoSchema,
   descricao: descSchema,
-  img: imgSchema
+  //img: imgSchema
 })
 
 // devemos atualizar email e senha apenas via better-auth
