@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
       img: imageUrl
     }
     const novoProduto = await createProduto(validated);
-    return NextResponse.json(novoProduto, { status: 201 });
+    return NextResponse.json({novoProduto}, { status: 201 });
   } catch (error) {
     console.log("ERRO REAL: ", error)
     return handleError(error);

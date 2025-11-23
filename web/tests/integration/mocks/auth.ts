@@ -47,3 +47,6 @@ export const mockAuth = {
 export const mockGetUserRole = vi.fn().mockImplementation(() => {
   return Promise.resolve(currentRole)
 })
+
+
+

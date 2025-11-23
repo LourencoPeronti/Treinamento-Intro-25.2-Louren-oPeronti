@@ -13,7 +13,8 @@ export async function POST(req: NextRequest){
       body: {
         success: true,
         message: "Usuário deslogado"
-      }
+      },
+      status: 200
     }))
   } catch (error: any) {
     return handleError(error)

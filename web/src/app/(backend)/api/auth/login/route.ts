@@ -1,9 +1,10 @@
 
 import { loginSchema } from "@/app/(backend)/schemas";
-import { auth } from "@/auth";
+import { auth } from "../../../../../auth";
 import { validBody } from "@/utils";
 import { handleError } from "@/app/(backend)/utils/handleError";
 import { NextRequest } from "next/server";
+import { loginUser } from "@/app/(backend)/services/auth/login";
 
 export async function POST(req: NextRequest){
   try {
@@ -17,15 +18,10 @@ export async function POST(req: NextRequest){
 
     const { email, password } = validated
 
-    const result = await auth.api.signInEmail({
-      body: { 
-        email, 
-        password,
-        callbackURL: "/"
-      },
-    })
+    const user = await loginUser(email, password)
+    
 
-    return new Response(JSON.stringify({result}), { status: 200 });
+    return new Response(JSON.stringify({user}), { status: 200 });
   } catch (error: any) {
 
     return handleError(error)

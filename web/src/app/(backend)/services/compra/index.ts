@@ -33,16 +33,17 @@ export async function createCompra(data: {
             create: data.userIds.map((userId) => ({
               user: { connect: { id: userId } },
             })),
-},
+            
+          },
         },
         include: {
-          compra: { include: { produto: true } },
-          user: { include: { user: true } },
+          //compra: { include: { produto: true } },
+          //user: { include: { user: true } },
         },
       });
       return compra
   } catch (error) {
-    throw new Error(String(Error) || "Falha ao criar compra")
+    throw new Error(String(error) || "Falha ao criar compra")
   }
 }
 // atualiza o status de uma compra
