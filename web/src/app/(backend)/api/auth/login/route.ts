@@ -1,6 +1,5 @@
 
-import { loginSchema } from "@/app/(backend)/schemas";
-import { auth } from "../../../../../auth";
+import { loginSchema } from "@/app/(backend)/schemas"
 import { validBody } from "@/utils";
 import { handleError } from "@/app/(backend)/utils/handleError";
 import { NextRequest } from "next/server";
