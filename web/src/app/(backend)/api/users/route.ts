@@ -5,6 +5,7 @@ import { blockForbiddenRequests, returnInvalidDataErrors, validBody, zodErrorHan
 import { findUserByEmail, getAllUsers } from "../../services/users";
 import { AllowedRoutes } from "@/types";
 import { auth } from "@/auth";
+import { handleError } from "../../utils/handleError";
 
 const allowedRoles: AllowedRoutes = {
   GET: ["SUPER_ADMIN", "ADMIN"]

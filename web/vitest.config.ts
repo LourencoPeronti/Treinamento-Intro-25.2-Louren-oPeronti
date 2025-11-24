@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [tsconfigPaths(), react()],
   test: {
     environment: 'node',
-    include: ['tests/integration/**/*.test.ts'],
+    include: ["src/**/*.spec.ts"],
     exclude: ['tests/e2e/**'],
 
     setupFiles: ['./tests/integration/setup.ts'],
@@ -45,5 +45,8 @@ export default defineConfig({
       inline: ['next']
     }
   },
-  }
+  },
+ssr: { // Adicione esta seção
+    noExternal: ['jsonwebtoken'], // Diga ao Vite para processar este pacote internamente
+  },
 })

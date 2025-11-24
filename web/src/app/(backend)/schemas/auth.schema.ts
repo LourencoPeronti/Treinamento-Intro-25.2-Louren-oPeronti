@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { emailSchema, passwordSchema } from "./base.schema";
+import { string, z } from "zod";
+import { emailSchema, nameSchema, passwordSchema, precoSchema, descSchema, imgSchema } from "./base.schema";
 
 export const loginSchema = z.object({
   email: emailSchema,
@@ -22,6 +22,13 @@ export const registerSchema = registerBaseObject
   .refine((data) => data.password === data.confirmPassword, {
     error: "Senhas não conferem",
     path: ["confirmPassword"],
+})
+
+export const produtoSchema = z.object({
+  nome: nameSchema,
+  preco: precoSchema,
+  descricao: descSchema,
+  //img: imgSchema
 })
 
 // devemos atualizar email e senha apenas via better-auth

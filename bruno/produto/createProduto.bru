@@ -1,0 +1,36 @@
+meta {
+  name: createProduto
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:3000/api/produtos
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Content-Type: multipart/form-data
+}
+
+body:json {
+  {
+    "nome": "Teste",
+    "preco": "123",
+    "descricao": "oieibwiaaaaaaaaaaaaaaaaaaaaaaa",
+    "img": "https://imagemMinha"
+  }
+}
+
+body:multipart-form {
+  nome: Arm encolhedora @contentType(text)
+  preco: 139.99 @contentType(text)
+  descricao: Olá, Mundo!Olá, Mundo!Olá, Mundo!Olá, Mundo!Olá, Mundo!Olá, Mundo!Olá, Mundo!Olá, Mundo!Olá, Mundo!Sou uma arma encolhedora para voce se encolher e ficar do tamanho das discordancias @contentType(text)
+  file: @file(C:\Users\lolop\Documents\Poli Junior\Treinamento-Intro-25.2-Louren-oPeronti\web\public\arma-removebg-preview.png) @contentType(file)
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

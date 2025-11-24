@@ -24,22 +24,30 @@ export const nameSchema = z
     .max(100, "Nome não pode ter mais de 100 caracteres")
     .trim()
     
-export const corSchema = z
+export const descSchema = z
     .string({
       error: (issue) => issue.input === undefined 
-      ? "Cor é obrigatória" 
-      : "Cor deve ser um texto" 
+    ? "Você deve colocar uma descrição" 
+    : "Descrição tem que ser um texto" 
     })
-    .regex(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/, "Cor deve estar no formato hexadecimal válido (ex: #FF0000)")
+    .min(30, "Descrição tem que ter pelo menos 30 caracteres")
+    .max(300, "Descrição tem que ter menos de 300 caracteres")
     .trim()
 
-export const slugSchema = z
+export const precoSchema = z
+    .coerce.number()
+    .min(1, "O produto deve conter um preço")
+
+export const imgSchema = z
     .string({
-      error: (issue) => issue.input === undefined 
-      ? "Slug é obrigatório" 
-      : "Slug deve ser um texto" 
+      error: (issue) => issue.input === undefined
+      ? "Imagem obrigatória" : "hhCampo deve ser um texto com a URL da sua imagem"
     })
-    .min(1, "Slug não pode estar vazio")
-    .max(100, "Slug não pode ter mais de 100 caracteres")
-    .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Slug deve conter apenas letras minúsculas, números e hífens, sem espaços")
-    .trim()
+
+export const statusSchema = z.enum([
+  "Pending",
+  "Paid",
+  "Shipped",
+  "Delivered",
+  "Cancelled"
+])
